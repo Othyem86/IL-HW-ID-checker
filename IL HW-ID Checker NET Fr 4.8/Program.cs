@@ -75,8 +75,5 @@ internal class Program
 
         Console.WriteLine("Taste drücken um Programm zu beenden");
         Console.ReadLine();
-
-        Console.WriteLine("Taste drücken um Programm zu beenden");
-        Console.ReadLine();
     }
 }

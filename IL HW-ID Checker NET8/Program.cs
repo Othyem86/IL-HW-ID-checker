@@ -72,7 +72,7 @@ internal class Program
         Console.WriteLine($"OS:         {osHwId}");
         Console.WriteLine($"FULL:       {fullHwId}");
 
-        Console.WriteLine("Taste drücken um Programm zu beenden");
+        Console.WriteLine("Press any key to end the program...");
         Console.ReadLine();
     }
 }
