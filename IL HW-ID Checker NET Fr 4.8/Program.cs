@@ -7,6 +7,14 @@ internal class Program
 {
     private static void Main(string[] _)
     {
+        var biosHwId = HardwareID.GetHardwareID(
+            CPU:       false,
+            HDD:       false,
+            MAC:       false,
+            Mainboard: false,
+            BIOS:      true,
+            OS:        false);
+
         var cpuHwId = HardwareID.GetHardwareID(
             CPU:       true,
             HDD:       false,
@@ -39,14 +47,6 @@ internal class Program
             BIOS:      false,
             OS:        false);
 
-        var biosHwId = HardwareID.GetHardwareID(
-            CPU:       false,
-            HDD:       false,
-            MAC:       false,
-            Mainboard: false,
-            BIOS:      true,
-            OS:        false);
-
         var osHwId = HardwareID.GetHardwareID(
             CPU:       false,
             HDD:       false,
@@ -73,11 +73,11 @@ internal class Program
 
         Console.WriteLine("=== HARDWARE IDs ===");
         Console.WriteLine();
+        Console.WriteLine($"BIOS:           {biosHwId}");
         Console.WriteLine($"CPU:            {cpuHwId}");
         Console.WriteLine($"HDD:            {hddHwId}");
         Console.WriteLine($"MAC:            {macHwId}");
         Console.WriteLine($"Mainboard:      {maiboardHwId}");
-        Console.WriteLine($"BIOS:           {biosHwId}");
         Console.WriteLine($"OS:             {osHwId}");
 
         Console.WriteLine();
