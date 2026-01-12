@@ -1,3 +1,4 @@
+using System.Text;
 using IntelliLock.Licensing;
 
 namespace IL_HW_ID_Checker_WPF_NET8;
@@ -72,14 +73,50 @@ public partial class MainWindow
 			
         InitializeComponent();
 
-        BiosTextBlock.Text = biosHwId;
-        CpuTextBlock.Text = cpuHwId;
-        HddTextBlock.Text = hddHwId;
-        MacTextBlock.Text = macHwId;
-        MainboardTextBlock.Text = maiboardHwId;
-        OsTextBlock.Text = osHwId;
+        var sb = new StringBuilder();
 
-        CpuMainboardTextBlock.Text = cpuMainboardHwId;
-        FullTextBlock.Text = fullHwId;
+        sb.AppendLine("=== HARDWARE IDs .NET8 ===");
+        sb.AppendLine();
+        sb.AppendLine($"BIOS:               {biosHwId}");
+        sb.AppendLine($"CPU:                {cpuHwId}");
+        sb.AppendLine($"HDD:                {hddHwId}");
+        sb.AppendLine($"MAC:                {macHwId}");
+        sb.AppendLine($"Mainboard:          {maiboardHwId}");
+        sb.AppendLine($"OS:                 {osHwId}");
+
+        sb.AppendLine();
+        sb.AppendLine($"CPU/Mainboard:      {cpuMainboardHwId}");
+        sb.AppendLine($"FULL:               {fullHwId}");
+
+        var licenseStatus = GetLicenseStatus(EvaluationMonitor.CurrentLicense.LicenseStatus);
+        var licenseStatusHdd = GetLicenseStatus(EvaluationMonitor.CurrentLicense.LicenseStatus_HDD);
+
+        sb.AppendLine();
+        sb.AppendLine($"License Status:     {licenseStatus}");
+        sb.AppendLine($"License Status HDD: {licenseStatusHdd}");
+
+        HwIdsTextBox.Text = sb.ToString();
+    }
+
+    private static string GetLicenseStatus(LicenseStatus status)
+    {
+        return status switch
+        {
+            LicenseStatus.NotChecked => "NotChecked",
+            LicenseStatus.Licensed => "Licensed",
+            LicenseStatus.EvaluationMode => "EvaluationMode",
+            LicenseStatus.EvaluationExpired => "EvaluationExpired",
+            LicenseStatus.LicenseFileNotFound => "LicenseFileNotFound",
+            LicenseStatus.HardwareNotMatched => "HardwareNotMatched",
+            LicenseStatus.InvalidSignature => "InvalidSignature",
+            LicenseStatus.ServerValidationFailed => "ServerValidationFailed",
+            LicenseStatus.Deactivated => "Deactivated",
+            LicenseStatus.Reactivated => "Reactivated",
+            LicenseStatus.FloatingLicenseUserExceeded => "FloatingLicenseUserExceeded",
+            LicenseStatus.FloatingLicenseServerError => "FloatingLicenseServerError",
+            LicenseStatus.FullVersionExpired => "FullVersionExpired",
+            LicenseStatus.FloatingLicenseServerTimeout => "FloatingLicenseServerTimeout",
+            _ => "INVALID LICENSE STATUS"
+        };
     }
 }
