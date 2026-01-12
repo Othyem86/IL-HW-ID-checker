@@ -9,6 +9,7 @@
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="6" />
+            <Setter Property="FontFamily" Value="Cascadia Code"/>
         </Style>
     </Window.Resources>
 
